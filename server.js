@@ -7,7 +7,14 @@ const app = express();
 const PORT = process.env.PORT || 4452;
 
 // Middleware
-app.use(cors()); // Allow CORS for all origins
+const corsOptions = {
+    origin: ['http://localhost:3000', 'https://your-frontend-url.vercel.app'], // Update with your frontend URL
+    methods: ['POST', 'GET'], // Specify allowed methods
+    credentials: true, // Allow credentials
+};
+
+app.use(cors(corsOptions));
+ // Allow CORS for all origins
 app.use(bodyParser.json());
 
 // POST route to handle data submission
