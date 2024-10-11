@@ -1,6 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-const bodyParser = require('body-parser');
 const fs = require('fs'); // Importing fs to handle file writing
 
 const app = express();
@@ -15,13 +14,18 @@ const corsOptions = {
 
 // Middleware
 app.use(cors(corsOptions)); // Enable CORS with the defined options
-app.use(bodyParser.json()); // Parse JSON request bodies
+app.use(express.json()); // Parse JSON request bodies
 
 // POST route to handle data submission
 app.post('/api/save-data', (req, res) => {
     const userData = req.body; // Get the user data from the request body
     console.log('Received data:', userData); // Log the received data for debugging
-    
+
+    // Validate received data (example: ensure userData is an object)
+    if (typeof userData !== 'object' || userData === null) {
+        return res.status(400).send({ message: "Invalid data format." });
+    }
+
     // Save data to data.txt
     fs.appendFile('data.txt', JSON.stringify(userData) + '\n', (err) => {
         if (err) {
