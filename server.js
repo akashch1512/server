@@ -6,16 +6,16 @@ const fs = require('fs'); // Importing fs to handle file writing
 const app = express();
 const PORT = process.env.PORT || 4452;
 
-// Middleware
+// CORS configuration
 const corsOptions = {
     origin: ['http://localhost:3000', 'https://your-frontend-url.vercel.app'], // Update with your frontend URL
     methods: ['POST', 'GET'], // Specify allowed methods
-    credentials: true, // Allow credentials
+    credentials: true, // Allow credentials such as cookies
 };
 
-app.use(cors(corsOptions));
- // Allow CORS for all origins
-app.use(bodyParser.json());
+// Middleware
+app.use(cors(corsOptions)); // Enable CORS with the defined options
+app.use(bodyParser.json()); // Parse JSON request bodies
 
 // POST route to handle data submission
 app.post('/api/save-data', (req, res) => {
@@ -34,5 +34,5 @@ app.post('/api/save-data', (req, res) => {
 
 // Start the server
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`); // This should be the output you see
+    console.log(`Server running on port ${PORT}`); // Output confirmation
 });
