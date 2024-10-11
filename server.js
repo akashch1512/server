@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 4452;
 
 // CORS configuration
 const corsOptions = {
-    origin: ['http://localhost:3000', 'https://your-frontend-url.vercel.app'], // Update with your frontend URL
+    origin: ['http://localhost:3000', 'https://server-dusky-eight.vercel.app/'], // Update with your frontend URL
     methods: ['POST', 'GET'], // Specify allowed methods
     credentials: true, // Allow credentials such as cookies
 };
